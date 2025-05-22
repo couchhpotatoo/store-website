@@ -5,7 +5,7 @@ const BannerText = () => {
   return (
    <>
    <section  className='py-12 text-center font-varela'>
-    <div className='container py-0 px-20'>
+    <div className='container py-0 px-100'>
         <div className='bg-gradient-to-t bg-[#aa6d6b]/70 text-white rounded-3xl p-8 hover:scale-105 duration-500 hover:shadow-2xl'>
             <UpdateFollower mouseOptions={{
 backgroundColor:"black",

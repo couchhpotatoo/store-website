@@ -1,7 +1,7 @@
 import React from 'react';
-import Headphone from "../../../assets/icons/headphone.png";
-import Headphone2 from "../../../assets/icons/headphone2.png";
-import Headphone3 from "../../../assets/icons/headphone3.png";
+import Headphone from "../../assets/icons/headphone.png";
+import Headphone2 from "../../assets/icons/headphone2.png";
+import Headphone3 from "../../assets/icons/headphone3.png";
 import { UpdateFollower } from 'react-mouse-follower';
 import { AnimatePresence, easeInOut, motion } from 'framer-motion';
 const fadeUp=(delay)=>{
@@ -27,7 +27,7 @@ ease:easeInOut,
       scale:0.5,
       transition:{
         duration:0.2,
-          ease:easeInOut
+          ease:easeInOut,
         
       },
     },
@@ -80,12 +80,13 @@ const Hero = () => {
          <AnimatePresence mode="wait">
           <UpdateFollower mouseOptions={{
              backgroundColor: 'white',
-              zIndex: 999,
+              zIndex: 9999,
+              followSpeed: 0.5    ,
               rotate:-720,
-             followSpeed: 2,
+             
              mixBlendMode:"difference",
              scale:10,
-           } }>
+           }}>
 
           
           <motion.h1 key={activeData.id} variants={fadeUp(0.2)} inital="hidden" animate="show" exit="exit"  className="text-4xl lg:text-6xl font-bold" >{activeData.title}</motion.h1>
@@ -101,17 +102,17 @@ const Hero = () => {
            
            } }>
 
-          <motion.p key={activeData.id} variants={fadeUp(0.3)} inital="hidden" animate="show" exit="exit"
-           className="text-sm text-white/80 leading-relaxed">{activeData.subtitle}</motion.p></UpdateFollower></AnimatePresence>
+          <motion.p key={activeData.id} variants={fadeUp(0.3)} inital="hidden" animate="show" exit="exit" className="text-sm text-white/80 leading-relaxed">{activeData.subtitle}</motion.p>
+          </UpdateFollower></AnimatePresence>
         <AnimatePresence mode="wait">
            <UpdateFollower
             mouseOptions={{
              backgroundColor: 'white',
               zIndex: 9999,
               rotate:-720,
-             followSpeed: 1.5,
+             followSpeed: 0.5,
              mixBlendMode:"difference",
-             scale:10,
+             scale:6,
              backgroundElement:<div>
                 <img src={activeData.image}/>
              </div>,
@@ -139,7 +140,7 @@ const Hero = () => {
             {headphonesData.map((item) => {
               return(
                
-              <div key={item.id} onClick={() => setActiveData(item)}
+              <div key={item.id} onClick={() => handleActiveData(item)}
                 className="flex flex-col items-center cursor-pointer">
               
                 <img

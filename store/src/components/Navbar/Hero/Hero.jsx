@@ -2,6 +2,37 @@ import React from 'react';
 import Headphone from "../../../assets/icons/headphone.png";
 import Headphone2 from "../../../assets/icons/headphone2.png";
 import Headphone3 from "../../../assets/icons/headphone3.png";
+import { UpdateFollower } from 'react-mouse-follower';
+import { AnimatePresence, easeInOut, motion } from 'framer-motion';
+const fadeUp=(delay)=>{
+  return {
+    hidden:{
+      opacity:0,
+      y:100,
+      scale:0.5,
+    },
+    show:{
+      opacity:1,
+      y:0,
+      scale:1,
+      transition:{
+duration:0.5,
+delay:delay,
+ease:easeInOut,
+      },
+    },
+    exit:{
+      opacity:0,
+      y:50,
+      scale:0.5,
+      transition:{
+        duration:0.2,
+          ease:easeInOut
+        
+      },
+    },
+  };
+};
 
 const headphonesData = [
   {
@@ -45,14 +76,56 @@ const Hero = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 w-full h-full bg-gray-900">
         {/* LEFT */}
         <div className="flex flex-col justify-center px-6 md:px-12 lg:px-20 space-y-6">
-          <h1 className="text-4xl lg:text-6xl font-bold">{activeData.title}</h1>
-          <p className="text-sm text-white/80 leading-relaxed">{activeData.subtitle}</p>
-          <button
+          
+         <AnimatePresence mode="wait">
+          <UpdateFollower mouseOptions={{
+             backgroundColor: 'white',
+              zIndex: 999,
+              rotate:-720,
+             followSpeed: 2,
+             mixBlendMode:"difference",
+             scale:10,
+           } }>
+
+          
+          <motion.h1 key={activeData.id} variants={fadeUp(0.2)} inital="hidden" animate="show" exit="exit"  className="text-4xl lg:text-6xl font-bold" >{activeData.title}</motion.h1>
+           </UpdateFollower></AnimatePresence>
+           <AnimatePresence mode="wait">
+            <UpdateFollower mouseOptions={{
+             backgroundColor: 'white',
+              zIndex: 999,
+              rotate:-720,
+             followSpeed: 2,
+             mixBlendMode:"difference",
+             scale:10,
+           
+           } }>
+
+          <motion.p key={activeData.id} variants={fadeUp(0.3)} inital="hidden" animate="show" exit="exit"
+           className="text-sm text-white/80 leading-relaxed">{activeData.subtitle}</motion.p></UpdateFollower></AnimatePresence>
+        <AnimatePresence mode="wait">
+           <UpdateFollower
+            mouseOptions={{
+             backgroundColor: 'white',
+              zIndex: 9999,
+              rotate:-720,
+             followSpeed: 1.5,
+             mixBlendMode:"difference",
+             scale:10,
+             backgroundElement:<div>
+                <img src={activeData.image}/>
+             </div>,
+             }}>
+            <motion.button key={activeData.id} variants={fadeUp(0.6)} inital="hidden" animate="show" exit="exit"
             style={{ backgroundColor: activeData.bgColor }}
             className="px-6 py-3 rounded-sm font-medium w-fit"
           >
             Buy and Listen
-          </button>
+          </motion.button>
+           </UpdateFollower>
+           
+         </AnimatePresence>
+         
 
           <div className="flex items-center gap-4 mt-12">
             <div className="w-16 h-[1px] bg-white" />
@@ -63,12 +136,12 @@ const Hero = () => {
           </div>
 
           <div className="grid grid-cols-3 gap-6 mt-6">
-            {headphonesData.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => setActiveData(item)}
-                className="flex flex-col items-center cursor-pointer"
-              >
+            {headphonesData.map((item) => {
+              return(
+               
+              <div key={item.id} onClick={() => setActiveData(item)}
+                className="flex flex-col items-center cursor-pointer">
+              
                 <img
                   src={item.image}
                   alt={item.model}
@@ -77,7 +150,7 @@ const Hero = () => {
                 <p className="text-sm font-semibold mt-2">{item.price}</p>
                 <p className="text-xs text-white/70">{item.model}</p>
               </div>
-            ))}
+)})}
           </div>
         </div>
 

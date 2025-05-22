@@ -6,6 +6,7 @@ import Services from './components/Services/Services'
 import Banner from './components/Banner/Banner'
 import BannerText from './components/Banner/BannerText'
 import Blogs from './components/Blogs/Blogs'
+import Footers from './components/Footers/Footers'
 const App = () => {
   return (
     <main className='overflow-x-hidden'>
@@ -22,7 +23,9 @@ const App = () => {
       <Services/>
       <Banner/>
       <BannerText/>
-      <Blogs/>
+      
+<Blogs/>
+<Footers/>
    </main>
   )
 }
